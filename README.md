@@ -17,18 +17,31 @@
 - `css/style.css` : 화면별 배경색 및 스타일
 - `js/game.js` : 게임 상태 머신(대기/카운트다운/성공/실패) 및 UI 제어
 - `js/db.js` : Firestore 연동, `saveScore(ms, nickname)` / `getTop(n)` 두 함수로 저장·조회 분리
-- `js/firebase-config.js` : Firebase 프로젝트 설정값 (직접 채워넣어야 함)
-- `.github/workflows/deploy-pages.yml` : `main` 브랜치 푸시 시 GitHub Pages 자동 배포
+- `js/firebase-config.example.js` : Firebase 설정값 예시 (로컬 개발용 템플릿, 커밋됨)
+- `js/firebase-config.js` : 실제 Firebase 설정값이 담기는 파일. `.gitignore`에 등록되어 있어 커밋되지 않으며, 배포 시에는 GitHub Actions Secrets로 자동 생성됨
+- `.github/workflows/deploy-pages.yml` : `main` 브랜치 푸시 시 Secrets로 `firebase-config.js`를 생성한 뒤 GitHub Pages에 자동 배포
 
 ## Firebase 설정 방법
 
-이 프로젝트는 Firebase 프로젝트 생성 및 설정을 직접 해야 합니다.
+이 프로젝트는 Firebase 프로젝트 생성 및 설정을 직접 해야 합니다. 실제 config 값은 저장소에 커밋하지 않고 **GitHub Actions Secrets**로 관리합니다.
 
 1. [Firebase 콘솔](https://console.firebase.google.com/)에서 새 프로젝트를 생성합니다.
 2. 프로젝트 개요 > 웹 앱 추가(`</>`) 를 눌러 웹 앱을 등록합니다.
-3. 등록 후 나오는 `firebaseConfig` 값을 복사해 `js/firebase-config.js`의 값에 그대로 붙여넣습니다.
-4. 콘솔 좌측 메뉴에서 **Firestore Database**를 생성합니다(프로덕션 모드 또는 테스트 모드 중 선택).
-5. Firestore 규칙(Rules) 탭에서 아래 규칙으로 교체합니다. 누구나 랭킹을 조회할 수 있고, 저장 시에는 형식이 올바른 경우에만 생성을 허용하며 수정·삭제는 막습니다.
+3. 등록 후 나오는 `firebaseConfig` 값을 저장소 **Settings > Secrets and variables > Actions**에 아래 이름으로 각각 등록합니다.
+
+   | Secret 이름 | 값 |
+   | --- | --- |
+   | `FIREBASE_API_KEY` | apiKey |
+   | `FIREBASE_AUTH_DOMAIN` | authDomain |
+   | `FIREBASE_PROJECT_ID` | projectId |
+   | `FIREBASE_STORAGE_BUCKET` | storageBucket |
+   | `FIREBASE_MESSAGING_SENDER_ID` | messagingSenderId |
+   | `FIREBASE_APP_ID` | appId |
+
+   `main` 브랜치에 푸시되면 워크플로우가 이 Secrets 값으로 `js/firebase-config.js`를 자동 생성해 배포합니다.
+4. 로컬에서 직접 실행하며 테스트하려면 `js/firebase-config.example.js`를 `js/firebase-config.js`로 복사한 뒤 실제 값을 채워넣으세요. 이 파일은 `.gitignore`에 등록되어 있어 커밋되지 않습니다.
+5. 콘솔 좌측 메뉴에서 **Firestore Database**를 생성합니다(프로덕션 모드 또는 테스트 모드 중 선택).
+6. Firestore 규칙(Rules) 탭에서 아래 규칙으로 교체합니다. 누구나 랭킹을 조회할 수 있고, 저장 시에는 형식이 올바른 경우에만 생성을 허용하며 수정·삭제는 막습니다.
 
    ```
    rules_version = '2';
