@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  padding: 24px;
+}
+
+.screen.idle,
+.screen.waiting {
+  background-color: #2563eb;
+}
+
+.screen.ready {
+  background-color: #dc2626;
+}
+
+.screen.fail {
+  background-color: #f59e0b;
+}
+
+.screen.result {
+  background-color: #16a34a;
+  cursor: default;
+}
+
+#message {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#reaction-time {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.nickname-form {
+  display: flex;
+  gap: 8px;
+}
+
+.nickname-form input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.nickname-form button,
+#retry-btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  background-color: #ffffff;
+  color: #16a34a;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nickname-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#save-status {
+  min-height: 1.2em;
+  font-size: 0.9rem;
+}
+
+#best-record {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+#ranking-list {
+  list-style: decimal;
+  text-align: left;
+  padding-left: 1.4em;
+  margin: 0;
+}
+
+.hidden {
+  display: none !important;
+}
