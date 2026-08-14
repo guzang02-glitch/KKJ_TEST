@@ -31,12 +31,12 @@
 
    | Secret 이름 | 값 |
    | --- | --- |
-   | `FIREBASE_API_KEY` | apiKey |
-   | `FIREBASE_AUTH_DOMAIN` | authDomain |
-   | `FIREBASE_PROJECT_ID` | projectId |
-   | `FIREBASE_STORAGE_BUCKET` | storageBucket |
-   | `FIREBASE_MESSAGING_SENDER_ID` | messagingSenderId |
-   | `FIREBASE_APP_ID` | appId |
+   | `VITE_FIREBASE_API_KEY` | apiKey |
+   | `VITE_FIREBASE_AUTH_DOMAIN` | authDomain |
+   | `VITE_FIREBASE_PROJECT_ID` | projectId |
+   | `VITE_FIREBASE_STORAGE_BUCKET` | storageBucket |
+   | `VITE_FIREBASE_MESSAGING_SENDER_ID` | messagingSenderId |
+   | `VITE_FIREBASE_APP_ID` | appId |
 
    `main` 브랜치에 푸시되면 워크플로우가 이 Secrets 값으로 `js/firebase-config.js`를 자동 생성해 배포합니다.
 4. 로컬에서 직접 실행하며 테스트하려면 `js/firebase-config.example.js`를 `js/firebase-config.js`로 복사한 뒤 실제 값을 채워넣으세요. 이 파일은 `.gitignore`에 등록되어 있어 커밋되지 않습니다.
